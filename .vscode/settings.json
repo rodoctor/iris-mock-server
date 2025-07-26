@@ -15,8 +15,21 @@
       },
       "links": {
         "UnitTest Portal": "${serverUrl}/csp/sys/%25UnitTest.Portal.Home.cls?$NAMESPACE=IRISAPP"
-      }
+      },
+      "server": "iris"
     },
-    "intersystems.testingManager.client.relativeTestRoot": "tests"
+    "intersystems.testingManager.client.relativeTestRoot": "tests",
+    "intersystems.servers": {
+      "iris": {
+        "webServer": {
+          "scheme": "http",
+          "host": "localhost",
+          "port": 52773
+        },
+        "username": "_SYSTEM",
+        "password": "SYS",
+        "namespace": "IRISAPP"
+      }
+    }
 
 }
