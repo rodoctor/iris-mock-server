@@ -60,7 +60,7 @@ Method RetornarMensagemMock(pRequest As core.msg.bo.RetornarMensagemMockRequest,
 			  "SOAP":..BuscarSOAP()
 			  )
 
-		Set objIntegracao = ##class(dado.integracao.TblIntegracao).%OpenId(..IdIntegracao)
+		Set objIntegracao = ##class(data.integracao.TblIntegracao).%OpenId(..IdIntegracao)
 
 		Do pResponse.Resposta.CopyFrom(objIntegracao.Resposta)
 		Set pResponse.ContentType = objIntegracao.ContentType
@@ -144,7 +144,7 @@ Method GerarLogInfo() [ Private ]
 
 Method BuscarREST() [ Private ]
 {
-	Set idIntegracao = ##class(dado.integracao.TblIntegracao).RetornarIdRegistroREST(..Sistema, ..PathIsolado, ..Acao)
+	Set idIntegracao = ##class(data.integracao.TblIntegracao).RetornarIdRegistroREST(..Sistema, ..PathIsolado, ..Acao)
 	If idIntegracao = ""
 	{
 		$$$THROWONERROR(Status, $System.Status.Error(5001, "Path não encontrado"))
@@ -154,7 +154,7 @@ Method BuscarREST() [ Private ]
 
 Method BuscarSOAP() [ Private ]
 {
-	Set idIntegracao = ##class(dado.integracao.TblIntegracao).RetornarIdRegistroSOAP(..Sistema, ..PathIsolado, ..SoapAction, ..Operacao)
+	Set idIntegracao = ##class(data.integracao.TblIntegracao).RetornarIdRegistroSOAP(..Sistema, ..PathIsolado, ..SoapAction, ..Operacao)
 	If idIntegracao = ""
 	{
 		$$$THROWONERROR(Status, $System.Status.Error(5001, "Path não encontrado"))

@@ -1,4 +1,4 @@
-Class dado.integracao.TblIntegracao Extends %Persistent
+Class data.integracao.TblIntegracao Extends %Persistent
 {
 
 // Index IdxPathAcaoSituacao On (Path, Acao, Situacao) [ Condition = {Situacao = "1"}, Unique ];
@@ -41,7 +41,7 @@ ClassMethod ExisteRegistroSituacaoAtivoREST(Output pID As %String = "", pSistema
     Set params($INCREMENT(params)) = protocolo
 
     Set sql = "SELECT ID, COUNT(ID) As Total "_
-                "FROM dado_integracao.TblIntegracao "_
+                "FROM data_integracao.TblIntegracao "_
                 "WHERE Sistema = ? "_
                 "AND Path = ? "_
                 "AND Acao = ? "_
@@ -74,7 +74,7 @@ ClassMethod ExisteRegistroSituacaoAtivoSOAP(Output pID As %String = "", pSistema
 
 
     Set sql = "SELECT ID, COUNT(ID) As Total "_
-                "FROM dado_integracao.TblIntegracao "_
+                "FROM data_integracao.TblIntegracao "_
                 "WHERE Situacao = ? "_
                 "AND Sistema = ? "_
                 "AND Protocolo = ?"
@@ -141,7 +141,7 @@ ClassMethod RetornarIdPorParametrosCompletoREST(pSistema, pPath, pAcao) As %Inte
     Set params($INCREMENT(params)) = protocolo
 
     Set sql = "SELECT ID "_
-                "FROM dado_integracao.TblIntegracao "_
+                "FROM data_integracao.TblIntegracao "_
                 "WHERE Sistema = ? "_
                 "AND Path = ? "_
                 "AND Acao = ? "_
@@ -172,7 +172,7 @@ ClassMethod RetornarIdPorPathDinamicoREST(pSistema, pPath) As %Integer
     
     Set sql = "SELECT ID, "_
     			"Path "_
-    			"FROM dado_integracao.TblIntegracao "_
+    			"FROM data_integracao.TblIntegracao "_
     			"WHERE Path LIKE '%<<Parametro>>%' "_
     			"AND Sistema = ? "_
     			"AND Situacao = ? "_
@@ -232,7 +232,7 @@ ClassMethod RetornarIdRegistroSOAP(pSistema As %String(MAXLEN="") = "", pPath As
 
 
     Set sql = "SELECT ID "_
-                "FROM dado_integracao.TblIntegracao "_
+                "FROM data_integracao.TblIntegracao "_
                 "WHERE Situacao = ? "_
                 "AND Sistema = ? "_
                 "AND Protocolo = ?"
@@ -268,57 +268,6 @@ ClassMethod RetornarIdRegistroSOAP(pSistema As %String(MAXLEN="") = "", pPath As
     }
 
     Return ""
-}
-
-Storage Default
-{
-<Data name="TblIntegracaoDefaultData">
-<Value name="1">
-<Value>%%CLASSNAME</Value>
-</Value>
-<Value name="2">
-<Value>Path</Value>
-</Value>
-<Value name="3">
-<Value>Acao</Value>
-</Value>
-<Value name="4">
-<Value>Resposta</Value>
-</Value>
-<Value name="5">
-<Value>ContentType</Value>
-</Value>
-<Value name="6">
-<Value>Protocolo</Value>
-</Value>
-<Value name="7">
-<Value>Situacao</Value>
-</Value>
-<Value name="8">
-<Value>VersaoCheck</Value>
-</Value>
-<Value name="9">
-<Value>Sistema</Value>
-</Value>
-<Value name="10">
-<Value>Descricao</Value>
-</Value>
-<Value name="11">
-<Value>StatusCode</Value>
-</Value>
-<Value name="12">
-<Value>SoapAction</Value>
-</Value>
-<Value name="13">
-<Value>Operacao</Value>
-</Value>
-</Data>
-<DataLocation>^dado.integracao.TblIntegracaoD</DataLocation>
-<DefaultData>TblIntegracaoDefaultData</DefaultData>
-<IdLocation>^dado.integracao.TblIntegracaoD</IdLocation>
-<IndexLocation>^dado.integracao.TblIntegracaoI</IndexLocation>
-<StreamLocation>^dado.integracao.TblIntegracaoS</StreamLocation>
-<Type>%Storage.Persistent</Type>
 }
 
 }

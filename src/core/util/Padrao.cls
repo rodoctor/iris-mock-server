@@ -6,16 +6,16 @@ ClassMethod InserePathResponse(pPath As %String, pResposta As %String, pContentT
 {
 	Set Status = $$$OK
 
-	Set objResponse = ##Class(dado.mock.Response).%New()
+	Set objResponse = ##Class(data.mock.Response).%New()
 	Set objResponse.Resposta = pResposta
 	Set objResponse.ContentType = pContentType
 
 	$$$THROWONERROR(Status, objResponse.%Save())
 
-	Set objPath = ##Class(dado.mock.Path).idxPathOpen(pPath)
+	Set objPath = ##Class(data.mock.Path).idxPathOpen(pPath)
 	If ('$ISOBJECT(objPath))
 	{
-		Set objPath = ##Class(dado.mock.Path).%New()
+		Set objPath = ##Class(data.mock.Path).%New()
 		Set objPath.Path = pPath
 	}
 
@@ -31,7 +31,7 @@ ClassMethod RetornaPathResponse(path As %String, ByRef pResposta As %String = ""
 {
 	Set Status = $$$OK
 
-	Set objPath = ##Class(dado.mock.Path).idxPathOpen(path)
+	Set objPath = ##Class(data.mock.Path).idxPathOpen(path)
 	If ('$ISOBJECT(objPath))
 	{
 		Set Status = $System.Status.Error(5001, "Path não encontrado")
