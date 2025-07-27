@@ -1,9 +1,9 @@
-Class core.modelo.Base Extends (%SerialObject, %XML.Adaptor)
+Class core.model.Base Extends (%SerialObject, %XML.Adaptor)
 {
 
 Storage Default
 {
-<StreamLocation>^core.modelo.BaseS</StreamLocation>
+<StreamLocation>^core.model.BaseS</StreamLocation>
 <Type>%Storage.Serial</Type>
 }
 
