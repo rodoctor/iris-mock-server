@@ -21,8 +21,8 @@ ClassMethod Service() As %Boolean
 {
 	Try
 	{
-		kill ^RMS
-		Set ^RMS($NAMESPACE,$USERNAME,"ROLES")=$ROLES
+		kill ^ROLES
+		Set ^ROLES($NAMESPACE,$USERNAME,"ROLES")=$ROLES
 		Set oldRoles = $ROLES
 
 		New $ROLES
@@ -36,8 +36,8 @@ ClassMethod Service() As %Boolean
 		Set outputRedirect = ##class(IORedirect.Redirect).Get()
 		$$$THROWONERROR(Status, ##class(IORedirect.Redirect).RestoreIO())
 
-		Set cspRequest = ##class(core.modelo.http.CSPRequest).%New()
-		$$$THROWONERROR(Status, cspRequest.PopulaObjeto(%request))
+		Set cspRequest = ##class(core.model.http.CSPRequest).%New()
+		$$$THROWONERROR(Status, cspRequest.HydrateFromCSPRequest(%request))
 
 		Set httpRequestJson = ##class(%Stream.GlobalCharacter).%New()
 		$$$THROWONERROR(Status, ##class(%ZEN.Auxiliary.jsonProvider).%WriteJSONStreamFromObject(.httpRequestJson,cspRequest,,,,"aelo"))
@@ -45,11 +45,11 @@ ClassMethod Service() As %Boolean
 		$$$THROWONERROR(Status, request.DumpRequest.CopyFrom(outputRedirect))
 		
 		#Dim response As core.msg.bp.MockResponse
-		$$$THROWONERROR(Status,..Executar(request,.response,"Enviar"))
+		$$$THROWONERROR(Status,..Execute(request,.response,"Send"))
 
-		If (response.Retorno = 0)
+		If (response.Return = 0)
 		{
-			$$$THROWONERROR(Status, ..GerarMensagemServico(500,response.DescricaoErro))
+			$$$THROWONERROR(Status, ..GenerateMessageService(500,response.ErrorDescription))
 		}
 		Else
 		{
@@ -57,11 +57,11 @@ ClassMethod Service() As %Boolean
 			Set %response.ContentType = response.ContentType
 			Set %response.Status = response.StatusHTTP
 			Set %response.Expires = 0
-			If (response.Resposta.Size > 0)
+			If (response.Response.Size > 0)
 			{
-				While 'response.Resposta.AtEnd
+				While 'response.Response.AtEnd
 				{
-					Write response.Resposta.Read(32767)
+					Write response.Response.Read(32767)
 				}
 			}
 			Else
@@ -74,33 +74,33 @@ ClassMethod Service() As %Boolean
 	{
 		Set Status = e.AsStatus()
 		Set msgErro = $System.Status.GetErrorText(Status)
-		Do ..GerarMensagemServico(500,msgErro)
+		Do ..GenerateMessageService(500,msgErro)
 	}
 	New $ROLES
 	Set $ROLES = oldRoles
 	Return 1
 }
 
-ClassMethod GerarMensagemServico(pHttpStatus As %String, pMensagem As %String) As %Status [ Private ]
+ClassMethod GenerateMessageService(pHttpStatus As %String, pMensagem As %String) As %Status [ Private ]
 {
 	Set %response.ContentType = "application/json"
 	Set %response.Status = pHttpStatus
 
 	Set horolog = $HOROLOG
 	Set timestamp = $ZDATETIME(horolog,3)
-	Set dataCriacao = $REPLACE(timestamp," ","T")_"Z"
+	Set dateCreated = $REPLACE(timestamp," ","T")_"Z"
 
 	Set proxy = ##class(%ZEN.proxyObject).%New()
 	Set proxy.status = pHttpStatus
-	Set proxy.criacao = dataCriacao
-	Set proxy.mensagem = pMensagem
+	Set proxy.dateCreated = dateCreated
+	Set proxy.message = pMensagem
 
 	$$$THROWONERROR(Status, ##class(%ZEN.Auxiliary.jsonProvider).%ObjectToJSON(proxy,.json))
 
 	Quit $$$OK
 }
 
-ClassMethod Executar(pInput As %RegisteredObject, Output pOutput As %RegisteredObject, ByRef pHint As %String) As %Status [ Private ]
+ClassMethod Execute(pInput As %RegisteredObject, Output pOutput As %RegisteredObject, ByRef pHint As %String) As %Status [ Private ]
 {
 	#Dim bs As core.bs.http.Service
 	$$$THROWONERROR(Status, ##class(Ens.Director).CreateBusinessService("Service HTTP",.bs))
@@ -113,7 +113,7 @@ ClassMethod Executar(pInput As %RegisteredObject, Output pOutput As %RegisteredO
 /// Override this method to process incoming data. Do not call SendRequestSync/Async() from outside this method (e.g. in a SOAP Service or a CSP page).
 Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %RegisteredObject, ByRef pHint As %String) As %Status
 {
-	Set:(pHint = "Enviar") Status = ..SendRequestSync("Mock Process",pInput,.pOutput)
+	Set:(pHint = "Send") Status = ..SendRequestSync("Mock Process",pInput,.pOutput)
 	Quit Status
 }
 

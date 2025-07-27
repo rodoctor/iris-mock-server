@@ -1,4 +1,4 @@
-Class core.modelo.http.CSPRequest Extends core.modelo.Base
+Class core.model.http.CSPRequest Extends core.modelo.Base
 {
 
 Property URL As %String(MAXLEN = "");
@@ -69,7 +69,11 @@ Property ProcessedRequestType As %Boolean [ InitialExpression = 0 ];
 
 Property SoapAction As %ArrayOfDataTypes;
 
-Method PopulaObjeto(request As %CSP.Request)
+Property NoResetTimeout As %String(MAXLEN = "");
+
+Property RegistryMethods As %Integer;
+
+Method HydrateFromCSPRequest(request As %CSP.Request)
 {
 	Set stream = ##class(%Stream.GlobalCharacter).%New()
 
@@ -260,22 +264,28 @@ Storage Default
 <Value>Cookies</Value>
 </Value>
 <Value name="29">
-<Value>CgiEnvs</Value>
+<Value>MimeData</Value>
 </Value>
 <Value name="30">
-<Value>AppData</Value>
+<Value>CgiEnvs</Value>
 </Value>
 <Value name="31">
-<Value>AppMatch</Value>
+<Value>AppData</Value>
 </Value>
 <Value name="32">
-<Value>ProcessedRequestType</Value>
+<Value>AppMatch</Value>
 </Value>
 <Value name="33">
-<Value>SoapAction</Value>
+<Value>ProcessedRequestType</Value>
 </Value>
 <Value name="34">
-<Value>MimeData</Value>
+<Value>SoapAction</Value>
+</Value>
+<Value name="35">
+<Value>NoResetTimeout</Value>
+</Value>
+<Value name="36">
+<Value>RegistryMethods</Value>
 </Value>
 </Data>
 <State>CSPRequestState</State>

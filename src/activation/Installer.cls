@@ -1,14 +1,14 @@
-Class ativacao.Instalacao Extends %Projection.AbstractProjection
+Class activation.Installer Extends %Projection.AbstractProjection
 {
 
 ClassMethod CreateProjection(classname As %String) As %Status [ CodeMode = generator, ForceGenerate ]
 {
 	Set namespace = $NAMESPACE
-	Set classe = "shift.bs.http.Service"
-	Set caminhoNamespace = $ZCONVERT($TRANSLATE($NAMESPACE,"_","/"),"l")
-	Set caminhoAplicacao = $$$FormatText("/shift/integracao/%1/service",caminhoNamespace)
+	Set classe = "core.bs.http.Service"
+	Set pathNamespace = $ZCONVERT($TRANSLATE($NAMESPACE,"_","/"),"l")
+	Set pathApplication = $$$FormatText("/mock/%1/service",pathNamespace)
 
-	Set aplicacao = ##class(%File).NormalizeDirectory(caminhoAplicacao)
+	Set application = ##class(%File).NormalizeDirectory(pathApplication)
 
     Set spec("AutheEnabled") = $$$AutheUnauthenticated
     Set spec("NameSpace") = namespace
@@ -19,25 +19,25 @@ ClassMethod CreateProjection(classname As %String) As %Status [ CodeMode = gener
 
 	Set namespace = $NAMESPACE
 	zn "%SYS"
-    If ('##class(Security.Applications).Exists(aplicacao))
+    If ('##class(Security.Applications).Exists(application))
     {
-        Set ret = ##class(Security.Applications).Create(aplicacao, .spec)
+        Set ret = ##class(Security.Applications).Create(application, .spec)
     }
     Else
     {
-        Set ret = ##class(Security.Applications).Modify(aplicacao, .spec)
+        Set ret = ##class(Security.Applications).Modify(application, .spec)
     }
-    
-    Write !,"Alterando permissão da DATABASE para RW",!
+
+    Write !,"Change the permission of the DATABASE to RW",!
     Set resource = "%DB_"_namespace_"-CODE"
     Set Properties("Description") = "The "_namespace_" Database"
     Set Properties("PublicPermission") = "RW"
     
     Set Status = ##Class(Security.Resources).Modify(resource,.Properties)
     If $$$ISERR(Status) throw ##Class(%Exception.StatusException).CreateFromStatus(Status)
-    
-    Write "Alteração finalizada da permissão da DATABASE para RW",!
-    
+
+    Write "Change the permission of the DATABASE to RW finished",!
+
     zn namespace
 
 	Return $$$OK

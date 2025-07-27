@@ -270,4 +270,55 @@ ClassMethod RetornarIdRegistroSOAP(pSistema As %String(MAXLEN="") = "", pPath As
     Return ""
 }
 
+Storage Default
+{
+<Data name="TblIntegracaoDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Path</Value>
+</Value>
+<Value name="3">
+<Value>Acao</Value>
+</Value>
+<Value name="4">
+<Value>Resposta</Value>
+</Value>
+<Value name="5">
+<Value>ContentType</Value>
+</Value>
+<Value name="6">
+<Value>Protocolo</Value>
+</Value>
+<Value name="7">
+<Value>Situacao</Value>
+</Value>
+<Value name="8">
+<Value>VersaoCheck</Value>
+</Value>
+<Value name="9">
+<Value>Sistema</Value>
+</Value>
+<Value name="10">
+<Value>Descricao</Value>
+</Value>
+<Value name="11">
+<Value>StatusCode</Value>
+</Value>
+<Value name="12">
+<Value>SoapAction</Value>
+</Value>
+<Value name="13">
+<Value>Operacao</Value>
+</Value>
+</Data>
+<DataLocation>^data.integracao.TblIntegracaoD</DataLocation>
+<DefaultData>TblIntegracaoDefaultData</DefaultData>
+<IdLocation>^data.integracao.TblIntegracaoD</IdLocation>
+<IndexLocation>^data.integracao.TblIntegracaoI</IndexLocation>
+<StreamLocation>^data.integracao.TblIntegracaoS</StreamLocation>
+<Type>%Storage.Persistent</Type>
+}
+
 }
