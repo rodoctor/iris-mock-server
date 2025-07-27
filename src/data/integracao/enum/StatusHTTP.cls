@@ -1,8 +1,0 @@
-Class data.integracao.enum.StatusHTTP Extends %RegisteredObject
-{
-
-Parameter VALUELIST = ",100,101,102,200,201,202,203,204,205,206,207,208,226,300,301,302,303,304,305,306,307,308,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,422,423,424,425,426,428,429,431,444,449,450,451,451,494,495,496,497,499,500,501,502,503,504,505,506,507,508,509,510,511,598,599";
-
-Parameter DISPLAYLIST = ",Continue,Switching Protocols,Processing,OK,Created,Accepted,Non-Authoritative Information,No Content,Reset Content,Partial Content,Multi-Status,Already Reported,IM Used,Multiple Choices,Moved Permanently,Found,See Other,Not Modified,Use Proxy,Switch Proxy,Temporary Redirect,Permanent Redirect,Bad Request,Unauthorized,Payment Required,Forbidden,Not Found,Method Not Allowed,Not Acceptable,Proxy Authentication Required,Request Timeout,Conflict,Gone,Length Required,Precondition Failed,Request Entity Too Large,Request-URI Too Long,Unsupported Media Type,Requested Range Not Satisfiable,Expectation Failed,I'm a teapot,Authentication Timeout,Enhance Your Calm,Unprocessable Entity,Locked,Failed Dependency,Method Failure,Unordered Collection,Upgrade Required,Precondition Required,Too Many Requests,Request Header Fields Too Large,No Response,Retry With,Blocked by Windows Parental Controls,Unavailable For Legal Reasons,Redirect,Request Header Too Large,Cert Error,No Cert,HTTP to HTTPS,Client Closed Request,Internal Server Error,Not Implemented,Bad Gateway,Service Unavailable,Gateway Timeout,HTTP Version Not Supported,Variant Also Negotiates,Insufficient Storage,Loop Detected,Bandwidth Limit Exceeded,Not Extended,Network Authentication Required,Network read timeout error,Network connect timeout error";
-
-}
