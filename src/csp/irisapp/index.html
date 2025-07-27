@@ -1,11 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mock - Simulacao de Servico</title>
+    <link rel="stylesheet" href="/csp/irisapp/style.css">
+    <link rel="stylesheet" href="/csp/irisapp/toast.css">
+    <script src="/csp/irisapp/script.js"></script>
+    <script src="/csp/irisapp/toast.js"></script>
 </head>
 <body>
-    <h1>Welcome to the Mock Server!</h1>
+    <header class="header">
+        <div class="header-content">
+            <a href="https://en.wikipedia.org/wiki/Mockingbird" target="_blank"><img src="/csp/irisapp/assets/mocking-bird.png" alt="IRIS Mock Server" class="logo"></a>
+            <h1>IRIS Mock Server</h1>
+        </div>
+    </header>
+    
+    <div id="toastContainer" class="toast-container"></div>
+
+    <div class="container">
+        <div class="buttons">
+            <button id="clearButton" onclick="clearForm()" hidden="true">Clear</button>
+            <button id="newButton" onclick="newForm()">New</button>
+            <button id="saveButton" onclick="saveForm()" hidden="true">Save</button>
+            <button id="searchButton" onclick="pesquisar()">Search</button>
+        </div>
+
+        <div class="field-group" id="codeGroup">
+            <label for="code">Code:</label>
+            <input type="text" id="code" name="code">
+        </div>
+
+        <div class="field-group" id="protocolGroup">
+            <label for="protocol">Protocol:</label>
+            <select id="protocol">
+                <option value="" disabled selected>Select a protocol</option>
+            </select>
+        </div>
+
+        <div class="field-group" id="systemGroup">
+            <label for="system">System:</label>
+            <input type="text" id="system" placeholder="Name of the system to be simulated.">
+        </div>
+
+        <div class="field-group" id="pathGroup">
+            <label for="path">Path:</label>
+            <div class="path-wrapper">
+                <span id="partOfPathId"></span>
+                <input type="text" id="path" placeholder="Digite o restante do path...">
+                <button id="copyPathButton" type="button" onclick="copyPath()">Copy</button>
+            </div>
+        </div>
+        
+        <div class="field-group" id="soapActionGroup">
+            <label for="soapAction">SOAP Action:</label>
+            <input type="text" id="soapAction" name="soapAction" placeholder="SOAP Action for the service.">
+        </div>
+
+        <div class="field-group" id="operationGroup">
+            <label for="operation">Operation:</label>
+            <input type="text" id="operation" name="operation" placeholder="Operation for the service.">
+        </div>
+        
+        <div class="field-group" id="actionGroup">
+            <label for="action">Action:</label>
+            <select id="action">
+                <option value="" disabled selected>Select an action</option>
+            </select>
+        </div>
+
+        <div class="field-group" id="statusHttpGroup">
+            <label for="statusHttp">Status HTTP:</label>
+            <select id="statusHttp">
+                <option value="" disabled selected>Select a status</option>
+            </select>
+        </div>
+
+        <div class="field-group" id="descriptionGroup">
+            <label for="description">Description:</label>
+            <input type="text" id="description" placeholder="Description of the service.">
+        </div>
+
+        <div class="field-group" id="contentTypeGroup">
+            <label for="contentType">ContentType:</label>
+            <input type="text" id="contentType">
+        </div>
+
+        <div class="field-group" id="responseGroup">
+            <label for="response">Response:</label>
+            <textarea id="response" placeholder="Body of the simulated response in JSON, XML etc."></textarea>
+        </div>
+
+        <div class="field-group" id="activeGroup">
+            <fieldset class="active-fieldset">
+                <legend>Mock is active:</legend>
+                <div class="radio-group">
+                    <label><input type="radio" name="active" value="1" checked> Active</label>
+                    <label><input type="radio" name="active" value="0"> Inactive</label>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <script>
+    </script>
 </body>
 </html>
