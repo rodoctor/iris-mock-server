@@ -3,7 +3,7 @@
   <Document name="iris-mock-server.ZPM">
     <Module>
       <Name>iris-mock-server</Name>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Description>Simulate REST and SOAP easily with zero-code and fast web control.</Description>
       <Keywords>mock</Keywords>
       <Packaging>module</Packaging>
