@@ -5,8 +5,10 @@
     <title>Mock - Simulacao de Servico</title>
     <link rel="stylesheet" href="/csp/irisapp/style.css">
     <link rel="stylesheet" href="/csp/irisapp/toast.css">
+    <link rel="stylesheet" href="/csp/irisapp/modal.css">
     <script src="/csp/irisapp/script.js"></script>
     <script src="/csp/irisapp/toast.js"></script>
+    <script src="/csp/irisapp/modal.js"></script>
 </head>
 <body>
     <header class="header">
@@ -23,7 +25,7 @@
             <button id="clearButton" onclick="clearForm()" hidden="true">Clear</button>
             <button id="newButton" onclick="newForm()">New</button>
             <button id="saveButton" onclick="saveForm()" hidden="true">Save</button>
-            <button id="searchButton" onclick="pesquisar()">Search</button>
+            <button id="searchButton" onclick="searchForm()">Search</button>
         </div>
 
         <div class="field-group" id="codeGroup">
@@ -101,7 +103,89 @@
             </fieldset>
         </div>
     </div>
-    <script>
-    </script>
+
+    <div id="searchModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <a href="https://en.wikipedia.org/wiki/Mockingbird" target="_blank"><img src="/csp/irisapp/assets/mocking-bird.png" alt="IRIS Mock Server" class="logo"></a>
+                <h2>Search Mocks</h2>
+                <button class="modal-close" onclick="closeSearchModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="search-filters">
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label for="filterSystem">System:</label>
+                            <input type="text" id="filterSystem" placeholder="Filter by system..." onkeyup="filterMocks()">
+                        </div>
+                        <div class="filter-group">
+                            <label for="filterProtocol">Protocol:</label>
+                            <select id="filterProtocol" onchange="filterMocks()">
+                                <option value="">All</option>
+                                <option value="REST">REST</option>
+                                <option value="SOAP">SOAP</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filterAction">Action:</label>
+                            <select id="filterAction" onchange="filterMocks()">
+                                <option value="">All</option>
+                                <option value="GET">GET</option>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                                <option value="PATCH">PATCH</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filterSituation">Situation:</label>
+                            <select id="filterSituation" onchange="filterMocks()">
+                                <option value="">All</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-results">
+                    <div class="results-header">
+                        <span id="resultsCount">0 mocks found</span>
+                        <button class="refresh-btn" onclick="refreshSearchResults()" title="Refresh">&#8635</button>
+                    </div>
+                    
+                    <div class="results-table-container">
+                        <table id="mocksTable" class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>System</th>
+                                    <th>Protocol</th>
+                                    <th>Path</th>
+                                    <th>Action</th>
+                                    <th>SOAP Action</th>
+                                    <th>Description</th>
+                                    <th>Situation</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mocksTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="loadingIndicator" class="loading-indicator">
+                        <div class="spinner"></div>
+                        <span>Loading mocks...</span>
+                    </div>
+                    
+                    <div id="noResults" class="no-results">
+                        <span>No mock found</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

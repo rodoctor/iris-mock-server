@@ -196,6 +196,7 @@ function newForm() {
     document.getElementById('searchButton').hidden = false;
 
     document.getElementById('protocol').disabled = false;
+    setMockActiveStatus(true)
 }
 
 async function initializeForm() {
@@ -226,6 +227,7 @@ async function initializeForm() {
 
     document.getElementById('response').value = '';
 
+    setMockActiveStatus(true)
     updatePartOfPathId();
 }
 
@@ -238,4 +240,39 @@ function updatePartOfPathId() {
         return;
     }
     partOfPathId.textContent = `${window.location.host}/mock/api/${system}/`
+}
+
+function setMockActiveStatus(isActive) {
+    const activeRadio = document.querySelector('input[name="active"][value="1"]');
+    const inactiveRadio = document.querySelector('input[name="active"][value="0"]');
+    
+    if (isActive === true || isActive === 1 || isActive === "1") {
+        activeRadio.checked = true;
+        inactiveRadio.checked = false;
+    } else {
+        activeRadio.checked = false;
+        inactiveRadio.checked = true;
+    }
+}
+
+// Função para obter o status atual
+function getMockActiveStatus() {
+    const checkedRadio = document.querySelector('input[name="active"]:checked');
+    return checkedRadio ? checkedRadio.value : "1"; // Default para ativo
+}
+
+//Quero implementar a chamara para listar todos os mocks 
+async function listAllMockResponses() {
+    try {
+        const response = await fetch('/mock/api/mock/getAllMockResponses');
+        const result = await response.json();
+
+        if (result.status == 'success' && result.data.length > 0) {
+            console.log(result)
+        } else {
+            console.error('Error loading mocks:', result);
+        }
+    } catch (error) {
+        console.error('Error fetching mocks:', error);
+    }
 }
