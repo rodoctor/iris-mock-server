@@ -172,12 +172,12 @@ function populateFormWithMock(mock) {
     document.getElementById('protocol').disabled = false;
 
     if (mock.protocol === 'REST') {
-        document.getElementById('action').value = mock.action || '';
         selectedREST();
+        document.getElementById('action').value = mock.action || '';
     } else if (mock.protocol === 'SOAP') {
+        selectedSOAP();
         document.getElementById('soapAction').value = mock.soapAction || '';
         document.getElementById('operation').value = mock.operation || '';
-        selectedSOAP();
     }
     debugger
     document.getElementById('code').value = mock.id || '';
