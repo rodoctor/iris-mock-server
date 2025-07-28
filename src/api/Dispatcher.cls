@@ -14,6 +14,7 @@ XData UrlMap
 <Routes>
   <Route Url="/ping" Method="GET" Call="Ping"/>
   <Map Prefix="/enums" Forward="api.rest.EnumController"/>
+  <Map Prefix="/mock" Forward="api.rest.MockResponseController"/>
 </Routes>
 }
 
