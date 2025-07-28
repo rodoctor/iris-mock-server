@@ -236,10 +236,10 @@ function updatePartOfPathId() {
     const system = document.getElementById('system').value.toLowerCase()
 
     if (system === '') {
-        partOfPathId.textContent = `${window.location.host}/mock/api/`
+        partOfPathId.textContent = `${window.location.host}/mock/service/`
         return;
     }
-    partOfPathId.textContent = `${window.location.host}/mock/api/${system}/`
+    partOfPathId.textContent = `${window.location.host}/mock/service/${system}/`
 }
 
 function setMockActiveStatus(isActive) {
