@@ -1,9 +1,6 @@
-Class data.TblIntegration Extends %Persistent
+Class data.TblMockResponse Extends %Persistent
 {
 
-// Index IdxPathAcaoSituacao On (Path, Acao, Situacao) [ Condition = {Situacao = "1"}, Unique ];
-
-/// Somente posso ter uma resposta ativa
 Property Path As %String(MAXLEN = "");
 
 Property Action As %String(VALUELIST = ",GET,POST,PUT,DELETE,PATCH");
@@ -26,7 +23,7 @@ Property SoapAction As %String(MAXLEN = "");
 
 Property Operation As %String(MAXLEN = "");
 
-ClassMethod ExistsRegistrationStatusActiveREST(Output pID As %String = "", pSystem As %String(MAXLEN="") = "", pPath As %String(MAXLEN="") = "", pAction As %String(MAXLEN="") = "") As %Boolean
+ClassMethod ExistsMockResponseActiveREST(Output pID As %String = "", pSystem As %String(MAXLEN="") = "", pPath As %String(MAXLEN="") = "", pAction As %String(MAXLEN="") = "") As %Boolean
 {
     Set situation = 1
     Set protocol = "REST"
@@ -39,7 +36,7 @@ ClassMethod ExistsRegistrationStatusActiveREST(Output pID As %String = "", pSyst
     Set params($INCREMENT(params)) = protocol
 
     Set sql = "SELECT ID, COUNT(ID) As Total "_
-                "FROM data.TblIntegration "_
+                "FROM data.TblMockResponse "_
                 "WHERE System = ? "_
                 "AND Path = ? "_
                 "AND Action = ? "_
@@ -59,7 +56,7 @@ ClassMethod ExistsRegistrationStatusActiveREST(Output pID As %String = "", pSyst
     Return 0
 }
 
-ClassMethod ExistsRegistrationStatusActiveSOAP(Output pID As %String = "", pSystem As %String(MAXLEN="") = "", pPath As %String(MAXLEN="") = "", pSoapAction As %String(MAXLEN="") = "", pOperation As %String(MAXLEN="") = "") As %Boolean
+ClassMethod ExistsMockResponseActiveSOAP(Output pID As %String = "", pSystem As %String(MAXLEN="") = "", pPath As %String(MAXLEN="") = "", pSoapAction As %String(MAXLEN="") = "", pOperation As %String(MAXLEN="") = "") As %Boolean
 {
     Set situation = 1
     Set protocol = "SOAP"
@@ -72,7 +69,7 @@ ClassMethod ExistsRegistrationStatusActiveSOAP(Output pID As %String = "", pSyst
 
 
     Set sql = "SELECT ID, COUNT(ID) As Total "_
-                "FROM data.TblIntegration "_
+                "FROM data.TblMockResponse "_
                 "WHERE Situation = ? "_
                 "AND System = ? "_
                 "AND Protocol = ?"
@@ -139,7 +136,7 @@ ClassMethod ReturnIdByParametersCompleteREST(pSystem, pPath, pAction) As %Intege
     Set params($INCREMENT(params)) = protocol
 
     Set sql = "SELECT ID "_
-                "FROM data.TblIntegration "_
+                "FROM data.TblMockResponse "_
                 "WHERE System = ? "_
                 "AND Path = ? "_
                 "AND Action = ? "_
@@ -170,7 +167,7 @@ ClassMethod ReturnIdByDynamicPathREST(pSystem, pPath) As %Integer
     
     Set sql = "SELECT ID, "_
     			"Path "_
-    			"FROM data.TblIntegration "_
+    			"FROM data.TblMockResponse "_
     			"WHERE Path LIKE '%<<Parameter>>%' "_
     			"AND System = ? "_
     			"AND Situation = ? "_
@@ -230,7 +227,7 @@ ClassMethod ReturnIdBySOAP(pSystem As %String(MAXLEN="") = "", pPath As %String(
 
 
     Set sql = "SELECT ID "_
-                "FROM data.TblIntegration "_
+                "FROM data.TblMockResponse "_
                 "WHERE Situation = ? "_
                 "AND System = ? "_
                 "AND Protocol = ?"
@@ -270,7 +267,7 @@ ClassMethod ReturnIdBySOAP(pSystem As %String(MAXLEN="") = "", pPath As %String(
 
 Storage Default
 {
-<Data name="TblIntegrationDefaultData">
+<Data name="TblMockResponseDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
 </Value>
@@ -308,11 +305,11 @@ Storage Default
 <Value>Operation</Value>
 </Value>
 </Data>
-<DataLocation>^data.TblIntegrationD</DataLocation>
-<DefaultData>TblIntegrationDefaultData</DefaultData>
-<IdLocation>^data.TblIntegrationD</IdLocation>
-<IndexLocation>^data.TblIntegrationI</IndexLocation>
-<StreamLocation>^data.TblIntegrationS</StreamLocation>
+<DataLocation>^data.TblMockResponseD</DataLocation>
+<DefaultData>TblMockResponseDefaultData</DefaultData>
+<IdLocation>^data.TblMockResponseD</IdLocation>
+<IndexLocation>^data.TblMockResponseI</IndexLocation>
+<StreamLocation>^data.TblMockResponseS</StreamLocation>
 <Type>%Storage.Persistent</Type>
 }
 
