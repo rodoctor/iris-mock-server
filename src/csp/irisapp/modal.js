@@ -122,7 +122,7 @@ function renderMocksTable() {
             <td>
                 <div class="action-buttons">
                     <button class="action-btn btn-edit" onclick="editMock(${mock.id})" title="Edit">
-                        &#10003;
+                       &#9998
                     </button>
                     <button class="action-btn btn-delete" onclick="deleteMock(${mock.id})" title="Delete">
                         &#10007;
