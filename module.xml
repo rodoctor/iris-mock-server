@@ -3,11 +3,16 @@
   <Document name="iris-mock-server.ZPM">
     <Module>
       <Name>iris-mock-server</Name>
-      <Version>0.1.7</Version>
-      <Description>InterSystems IRIS Mock Server</Description>
+      <Version>1.0.0</Version>
+      <Description>Simulate REST and SOAP easily with zero-code and fast web control.</Description>
+      <Keywords>mock</Keywords>
       <Packaging>module</Packaging>
+      <WebApplication AutoCompile="0" CookiePath="/app/" DefaultSuperclass="index.html" DefaultTimeout="900" DeployPath="${cspdir}irisapp" PasswordAuthEnabled="1" Recurse="1" ServeFiles="2" ServeFilesTimeout="3600" SourcePath="/usr/irissys/csp/irisapp" UnauthenticatedEnabled="0" Url="/app" UseSessionCookie="2"/>
+      <WebApplication AuthenticationMethods="36" AutoCompile="0" CookiePath="/csp/irisapp/" DefaultTimeout="900" DeployPath="${cspdir}irisapp" Description="Interoperability Management Portal" GroupById="%ISCMgtPortal" Recurse="1" Resource="%Ens_Portal" ServeFiles="2" ServeFilesTimeout="3600" SourcePath="/usr/irissys/csp/irisapp" Url="/csp/irisapp" UseSessionCookie="2"/>
+      <WebApplication CookiePath="/mock/api/" DefaultTimeout="900" Description="API for internal Use" DispatchClass="api.Dispatcher" MatchRoles=":%All" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="0" Url="/mock/api" UseSessionCookie="2"/>
+      <WebApplication CookiePath="/mock/service/" DefaultTimeout="900" Description="Api REST Irisapp" DispatchClass="core.bs.http.Service" MatchRoles=":%All" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="0" Url="/mock/service" UseSessionCookie="2"/>
+      <LifecycleClass>%IPM.Lifecycle.Module</LifecycleClass>
       <SourcesRoot>src</SourcesRoot>
-      <Resource Name="iris-mock-server.PKG"/>
     </Module>
   </Document>
 </Export>
