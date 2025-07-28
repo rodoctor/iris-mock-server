@@ -1,6 +1,5 @@
- [![Gitter](https://img.shields.io/badge/Available%20on-Intersystems%20Open%20Exchange-00b2a9.svg)](https://openexchange.intersystems.com/package/intersystems-iris-dev-template)
- [![Quality Gate Status](https://community.objectscriptquality.com/api/project_badges/measure?project=intersystems_iris_community%2Fintersystems-iris-dev-template&metric=alert_status)](https://community.objectscriptquality.com/dashboard?id=intersystems_iris_community%2Fintersystems-iris-dev-template)
- [![Reliability Rating](https://community.objectscriptquality.com/api/project_badges/measure?project=intersystems_iris_community%2Fintersystems-iris-dev-template&metric=reliability_rating)](https://community.objectscriptquality.com/dashboard?id=intersystems_iris_community%2Fintersystems-iris-dev-template)
+ [![Gitter](https://img.shields.io/badge/Available%20on-Intersystems%20Open%20Exchange-00b2a9.svg)](https://openexchange.intersystems.com/package/iris-mock-server)
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat&logo=AdGuard)](LICENSE)
 # Iris Mock Server
@@ -149,8 +148,40 @@ graph TB
     class MockService,Router,ResponseGen mockLayer
     class Client,DevTeam external
 ```
-========ADICIONAR AQUI O TUTORIAL=============
+## Using Example
 
+## Project Structure
+### Structure
+```bash
+.
+└── src
+    ├── IORedirect
+    ├── activation
+    ├── api
+    │   └── rest
+    ├── core
+    │   ├── bo
+    │   ├── bp
+    │   ├── bs
+    │   │   └── http
+    │   ├── model
+    │   │   └── http
+    │   ├── msg
+    │   │   ├── bo
+    │   │   └── bp
+    │   └── prd
+    ├── csp
+    │   └── irisapp
+    │       └── assets
+    └── data
+        └── enum
+```
+
+## Contributing
+Contributions are welcome and appreciated!
+If you have suggestions for improvements, bug reports, or want to add new features, feel free to open an issue or submit a pull request.
+
+Whether it’s code, documentation, ideas, or testing — your help is welcome. 
 
 ## Contributors
 Rodolfo Moreira <br> <a href="https://www.linkedin.com/in/rodoctor/">![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)</a>
