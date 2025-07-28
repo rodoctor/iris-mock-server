@@ -1,11 +1,11 @@
 Class core.msg.bp.MockResponse Extends Ens.Response
 {
 
-Property Retorno As %Boolean [ InitialExpression = 1 ];
+Property Return As %Boolean [ InitialExpression = 1 ];
 
-Property DescricaoErro As %String(MAXLEN = "");
+Property ErrorDescription As %String(MAXLEN = "");
 
-Property Resposta As %Stream.GlobalCharacter;
+Property Response As %Stream.GlobalCharacter;
 
 Property ContentType As %String(MAXLEN = "");
 
@@ -16,13 +16,13 @@ Storage Default
 <Data name="MockResponseDefaultData">
 <Subscript>"MockResponse"</Subscript>
 <Value name="1">
-<Value>Retorno</Value>
+<Value>Return</Value>
 </Value>
 <Value name="2">
-<Value>DescricaoErro</Value>
+<Value>ErrorDescription</Value>
 </Value>
 <Value name="3">
-<Value>Resposta</Value>
+<Value>Response</Value>
 </Value>
 <Value name="4">
 <Value>ContentType</Value>

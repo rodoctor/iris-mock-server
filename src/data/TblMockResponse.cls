@@ -115,12 +115,12 @@ ClassMethod ExistsMockResponseActiveSOAP(Output pID As %String = "", pSystem As 
     Return 0
 }
 
-ClassMethod RetornarIdRegistroREST(pSystem As %String(MAXLEN="") = "", pPath As %String(MAXLEN="") = "", pAction As %String(MAXLEN="") = "") As %String
+ClassMethod ReturnIdREST(pSystem As %String(MAXLEN="") = "", pPath As %String(MAXLEN="") = "", pAction As %String(MAXLEN="") = "") As %String
 {
-    Set idRegistro = ..ReturnIdByParametersCompleteREST(pSystem, pPath, pAction)
-	Set:(idRegistro = "") idRegistro =..ReturnIdByDynamicPathREST(pSystem, pPath)
+    Set id = ..ReturnIdByParametersCompleteREST(pSystem, pPath, pAction)
+	Set:(id = "") id =..ReturnIdByDynamicPathREST(pSystem, pPath)
 
-	Return idRegistro
+	Return id
 }
 
 ClassMethod ReturnIdByParametersCompleteREST(pSystem, pPath, pAction) As %Integer
@@ -214,7 +214,7 @@ ClassMethod ReturnIdByDynamicPathREST(pSystem, pPath) As %Integer
 	Return ""
 }
 
-ClassMethod ReturnIdBySOAP(pSystem As %String(MAXLEN="") = "", pPath As %String(MAXLEN="") = "", pSoapAction As %String(MAXLEN="") = "", pOperation As %String(MAXLEN="") = "") As %String
+ClassMethod ReturnIdSOAP(pSystem As %String(MAXLEN="") = "", pPath As %String(MAXLEN="") = "", pSoapAction As %String(MAXLEN="") = "", pOperation As %String(MAXLEN="") = "") As %String
 {
     Set situation = 1
     Set protocol = "SOAP"

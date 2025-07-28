@@ -13,7 +13,7 @@ Method OnRequest(pRequest As core.msg.bp.MockRequest, Output pResponse As core.m
 		Set request.HttpRequestJson = pRequest.HttpRequestJson
 		$$$THROWONERROR(Status,..SendRequestSync("Mock Operation",request,.response))
 
-		Set pResponse.Resposta = response.Response
+		Set pResponse.Response = response.Response
 		Set pResponse.ContentType = response.ContentType
 		Set pResponse.Return = response.Return
 		Set pResponse.ErrorDescription = response.ErrorDescription

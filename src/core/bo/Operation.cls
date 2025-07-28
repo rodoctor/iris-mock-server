@@ -19,7 +19,7 @@ Property IntegrationId As %String;
 
 ClassMethod TestREST()
 {
-	Set request = ##class(core.msg.bo.ReturnMockMessageRequest).%OpenId(470)
+	Set request = ##class(core.msg.bo.ReturnMockMessageRequest).%OpenId(51)
 	Set bo = ..%New("Mock Operation")
 	Do bo.ReturnMockMessage(request,.response)
 }
@@ -60,11 +60,11 @@ Method ReturnMockMessage(pRequest As core.msg.bo.ReturnMockMessageRequest, Outpu
 			  "SOAP":..SearchSOAP()
 			  )
 
-		Set objIntegracao = ##class(data.integracao.TblIntegracao).%OpenId(..IntegrationId)
+		Set mockResponse = ##class(data.TblMockResponse).%OpenId(..IntegrationId)
 
-		Do pResponse.Response.CopyFrom(objIntegracao.Response)
-		Set pResponse.ContentType = objIntegracao.ContentType
-		Set pResponse.StatusHTTP = objIntegracao.StatusCode
+		Do pResponse.Response.CopyFrom(mockResponse.Response)
+		Set pResponse.ContentType = mockResponse.ContentType
+		Set pResponse.StatusHTTP = mockResponse.StatusCode
 	}
 	Catch(e)
 	{
@@ -144,7 +144,7 @@ Method GenerateLogInfo() [ Private ]
 
 Method SearchREST() [ Private ]
 {
-	Set integrationId = ##class(data.integracao.TblIntegracao).RetornarIdRegistroREST(..System, ..IsolatedPath, ..Action)
+	Set integrationId = ##class(data.TblMockResponse).ReturnIdREST(..System, ..IsolatedPath, ..Action)
 	If integrationId = ""
 	{
 		$$$THROWONERROR(Status, $System.Status.Error(5001, "Path not found"))
@@ -154,7 +154,7 @@ Method SearchREST() [ Private ]
 
 Method SearchSOAP() [ Private ]
 {
-	Set integrationId = ##class(data.integracao.TblIntegracao).RetornarIdRegistroSOAP(..System, ..IsolatedPath, ..SoapAction, ..Operation)
+	Set integrationId = ##class(data.TblMockResponse).ReturnIdResponseSOAP(..System, ..IsolatedPath, ..SoapAction, ..Operation)
 	If integrationId = ""
 	{
 		$$$THROWONERROR(Status, $System.Status.Error(5001, "Path not found"))

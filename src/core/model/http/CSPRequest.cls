@@ -1,4 +1,4 @@
-Class core.model.http.CSPRequest Extends core.modelo.Base
+Class core.model.http.CSPRequest Extends core.model.Base
 {
 
 Property URL As %String(MAXLEN = "");
