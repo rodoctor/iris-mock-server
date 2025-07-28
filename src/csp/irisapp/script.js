@@ -255,13 +255,11 @@ function setMockActiveStatus(isActive) {
     }
 }
 
-// Função para obter o status atual
 function getMockActiveStatus() {
     const checkedRadio = document.querySelector('input[name="active"]:checked');
-    return checkedRadio ? checkedRadio.value : "1"; // Default para ativo
+    return checkedRadio ? checkedRadio.value : "1"; 
 }
 
-//Quero implementar a chamara para listar todos os mocks 
 async function listAllMockResponses() {
     try {
         const response = await fetch('/mock/api/mock/getAllMockResponses');
@@ -275,4 +273,119 @@ async function listAllMockResponses() {
     } catch (error) {
         console.error('Error fetching mocks:', error);
     }
+}
+
+async function saveForm() {
+    try {
+        showToast('Saving...', 'Preparing mock data for save', 2000);
+        
+        const formData = collectFormData();
+        
+        const validationError = validateFormData(formData);
+        if (validationError) {
+            showToast('Validation Error', validationError, 'error', 4000);
+            return;
+        }
+        
+        const response = await fetch('/mock/api/mock/saveMockResponse', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+            showToast('Mock Saved Successfully!', `Mock #${result.id} has been saved`, 4000);
+
+            document.getElementById('code').value = result.id;
+            
+            clearForm();
+            
+        } else {
+            showToast('Save Failed', result.message || 'Unknown error occurred', 5000);
+        }
+        
+    } catch (error) {
+        console.error('Error saving mock:', error);
+        showToast('Network Error', 'Unable to connect to server. Please try again.', 5000);
+    }
+}
+
+function collectFormData() {
+    const code = document.getElementById('code').value;
+    const protocol = document.getElementById('protocol').value;
+    const system = document.getElementById('system').value;
+    const path = document.getElementById('path').value;
+    const description = document.getElementById('description').value;
+    const statusHttp = document.getElementById('statusHttp').value;
+    const contentType = document.getElementById('contentType').value;
+    const response = document.getElementById('response').value;
+    const mockStatus = getMockActiveStatus(); // função que você já tem
+    
+    const formData = {
+        id: code || "*NEW*", // Se vazio, será novo
+        protocol: protocol,
+        system: system,
+        path: path,
+        description: description,
+        statusCode: statusHttp,
+        contentType: contentType,
+        response: response,
+        situation: parseInt(mockStatus)
+    };
+    
+    if (protocol === 'REST') {
+        formData.action = document.getElementById('action').value;
+        formData.soapAction = ""; 
+        formData.operation = ""; 
+    } else if (protocol === 'SOAP') {
+        formData.action = "POST"; 
+        formData.soapAction = document.getElementById('soapAction').value;
+        formData.operation = document.getElementById('operation').value;
+    }
+    
+    return formData;
+}
+
+function validateFormData(formData) {
+    if (!formData.protocol) {
+        return "Protocol is required";
+    }
+    
+    if (!formData.system) {
+        return "System is required";
+    }
+    
+    if (!formData.description) {
+        return "Description is required";
+    }
+    
+    if (!formData.statusCode) {
+        return "Status Code is required";
+    }
+    
+    if (formData.protocol === 'REST') {
+        if (!formData.action) {
+            return "Action is required for REST protocol";
+        }
+        
+        if (!formData.path) {
+            return "Path is required for REST protocol";
+        }
+    }
+    
+    if (formData.protocol === 'SOAP') {
+        if (!formData.soapAction) {
+            return "SOAP Action is required for SOAP protocol";
+        }
+        
+        if (!formData.operation) {
+            return "Operation is required for SOAP protocol";
+        }
+    }
+    
+    return null;
 }
