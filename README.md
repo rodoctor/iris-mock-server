@@ -60,7 +60,7 @@ graph TB
     
     %% Web Interface Layer
     subgraph "Web Interface Layer"
-        WebUI[Modern Web UI<br/>- Glassmorphism Design<br/>- Toast Notifications<br/>- Modal Search<br/>- Responsive Layout]
+        WebUI[Modern Web UI<br/>- Toast Notifications<br/>- Modal Search<br/>- Responsive Layout]
         Static[Static Assets<br/>- CSS Stylesheets<br/>- JavaScript Files<br/>- Images & Icons]
     end
     
@@ -97,7 +97,7 @@ graph TB
     
     %% Mock Service Flow
     subgraph "Mock Service Flow"
-        MockService[Mock Service Endpoint<br/>/mock/service/{system}/{path}]
+        MockService["Mock Service /mock/service/{system}/{path}"]
         Router[Protocol Router<br/>REST vs SOAP]
         ResponseGen[Response Generator<br/>Dynamic Content<br/>Status Codes<br/>Headers]
     end
