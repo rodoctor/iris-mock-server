@@ -2,7 +2,8 @@
     "files.associations": {
 
         "Dockerfile*": "dockerfile",
-        "iris.script": "objectscript"
+        "iris.script": "objectscript",
+        "*.html": "html"
       },
     "objectscript.conn" :{
       "active": true,
@@ -30,6 +31,9 @@
         "password": "SYS",
         "namespace": "IRISAPP"
       }
-    }
-
+    },
+    "objectscript.compileFlags": "ck",
+    "objectscript.compileOnSave": true,
+    "files.encoding": "utf8bom",
+    "files.autoGuessEncoding": false
 }
