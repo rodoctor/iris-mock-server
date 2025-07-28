@@ -147,12 +147,12 @@ ClassMethod SaveMockResponse() As %Boolean
         If (body.%Get("situation") = 1)
         {
             Set return = $CASE(body.%Get("protocol"),
-                "REST":##class(data.TblMockResponse).ExistsMockResponseActiveREST(.pIdIntegracao,body.%Get("system"), body.%Get("path"), body.%Get("action")),
-                "SOAP":##class(data.TblMockResponse).ExistsMockResponseActiveSOAP(.pIdIntegracao,body.%Get("system"), body.%Get("path"), body.%Get("soapAction"), body.%Get("operation")),
+                "REST":##class(data.TblMockResponse).ExistsMockResponseActiveREST(.pId,body.%Get("system"), body.%Get("path"), body.%Get("action")),
+                "SOAP":##class(data.TblMockResponse).ExistsMockResponseActiveSOAP(.pId,body.%Get("system"), body.%Get("path"), body.%Get("soapAction"), body.%Get("operation")),
                 :0
             )
 
-            If ((return = 1) && (body.%Get("id") '= pIdIntegracao))
+            If ((return = 1) && (body.%Get("id") '= pId))
             {
                 $$$THROWONERROR(Status,$System.Status.Error(5001, "There is already a mock response with the data provided."))
             }
